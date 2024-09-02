@@ -1,0 +1,46 @@
+
+.main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* This will push the logout button to the end */
+    background-color: #f8f8f8;
+    padding: 10px;
+  }
+  
+  .main-navigation__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .main-navigation__item {
+    margin-right: 15px;
+  }
+  
+  .main-navigation__link {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+    transition: color 0.3s ease;
+  }
+  
+  .main-navigation__link:hover,
+  .main-navigation__link--current {
+    color: #0070f3; /* Example hover color */
+    font-weight: bold;
+  }
+  
+  .main-navigation__button {
+    background-color: #0070f3; /* Example button background color */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .main-navigation__button:hover {
+    background-color: #005bb5; /* Example button hover color */
+  }
