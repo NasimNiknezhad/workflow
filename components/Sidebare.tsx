@@ -1,8 +1,24 @@
-import SidebarNavigation from "./SidebarNavigation";
+import SidebarNavigation from './SidebarNavigation';
 
-export default function Sidebar() {
-	return 		  <div >
-                  <SidebarNavigation />
+interface Project {
+  id: number;
+  title: string;
+}
 
-      </div>
+interface Task {
+  id: number;
+  title: string;
+}
+
+interface SidebarProps {
+  projects: Project[];
+  tasks: Task[];
+}
+
+export default function Sidebare({ projects ,tasks}: SidebarProps) {
+  return (
+    <div>
+      <SidebarNavigation projects={projects} tasks={tasks} />
+    </div>
+  );
 }

@@ -15,7 +15,7 @@ const linkTargets = [
   { text: 'Tasks', url: '/task' },
 ] satisfies LinkTarget[];
 
-export default function MainNavigation() {
+export default function HeaderNavigation() {
   const pathname = usePathname();
 
   return (

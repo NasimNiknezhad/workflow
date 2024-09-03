@@ -6,9 +6,14 @@ body {
 .site-wrapper {
 	display: flex;
 	flex-direction: column;
-	/*  https://ishadeed.com/article/new-viewport-units/ */
-	min-height: 100dvh;
+	min-height: 100vh;
 	background-color: var(--background-color);
+}
+
+/* Flexbox layout for sidebar and content */
+.main-layout {
+	display: flex;
+	flex-grow: 1;
 }
 
 .site-content {
@@ -16,16 +21,16 @@ body {
 	max-width: var(--max-width-m);
 	margin-inline: auto;
 	width: 100%;
+	padding-bottom: 1rem;
 }
 
 footer {
-    background-color: #0070f3;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    position: sticky;
-    bottom: 0;
-    width: 100%;
+	background-color: #0070f3;
+	color: white;
+	text-align: center;
+	padding: 1rem;
+	width: 100%;
+	margin-top: auto;
 }
 
 .site-header,
@@ -35,7 +40,11 @@ footer {
 	padding-block: var(--content-padding);
 }
 
-/* Hilfsklassen für einheitliches Layout. */
+/* Sidebar specific styles */
+.sidebar {
+	width: 250px; /* Adjust the width as needed */
+	background-color: var(--background-color); /* Match your design */
+}
 
 .content-padding {
 	padding-inline: var(--content-padding);
@@ -44,47 +53,10 @@ footer {
 .content-width {
 	margin-inline: auto;
 	width: 100%;
-
-	&:where(.content-width--s) {
-		max-width: var(--max-width-s);
-	}
-
-	&:where(.content-width--m) {
-		max-width: var(--max-width-m);
-	}
-
-	&:where(.content-width--l) {
-		max-width: var(--max-width-l);
-	}
 }
-
-/* Klassen für Elemente, die aus ihrem Container ausbrechen sollen,
-z.B. über die volle Breite der Seite. Geeignet für ein einspaltiges
-Layout mit in der Mitte zentriertem und in der Breite begrenztem
-Hauptinhalt. */
 
 .custom-width {
 	width: 100vw;
 	translate: -50%;
 	margin-inline-start: 50%;
-
-	&:where(.custom-width--s) {
-		max-width: var(--max-width-s);
-	}
-
-	&:where(.custom-width--m) {
-		max-width: var(--max-width-m);
-	}
-
-	&:where(.custom-width--l) {
-		max-width: var(--max-width-l);
-	}
-
-	&:where(.custom-width--xl) {
-		max-width: var(--max-width-xl);
-	}
-
-	&:where(.custom-width--full) {
-		max-width: 100vi;
-	}
 }

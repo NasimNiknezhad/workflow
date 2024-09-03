@@ -1,68 +1,134 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { CgAdd, CgRemove } from 'react-icons/cg'; // Import icons for add and remove
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { CgAdd, CgRemove } from "react-icons/cg";
+import { deleteProject, deleteTask } from './SidbarNavigationServerAction';
+import "../css/components/SidebarNavigation.css";
+
+interface Project {
+  id: number;
+  title: string;
+}
+
+interface Task {
+  id: number;
+  title: string;
+}
+
+interface MainLayoutProps {
+  projects: Project[];
+  tasks: Task[];
+}
 
 type LinkTarget = {
   text: string;
   url: string;
 };
 
-const projectLinks: LinkTarget[] = [
-  { text: 'Project 1', url: '/project/1' },
-  { text: 'Project 2', url: '/project/2' },
+const quickLinks: LinkTarget[] = [
+  { text: "New-Project", url: "/new-project" },
+  { text: "New-Task", url: "/new-task" },
 ];
 
-const taskLinks: LinkTarget[] = [
-  { text: 'Task 1', url: '/task/1' },
-  { text: 'Task 2', url: '/task/2' },
-];
-
-export default function VerticalSidebar() {
+export default function SidebarNavigation({ projects, tasks }: MainLayoutProps) {
   const [isProjectsOpen, setProjectsOpen] = useState(false);
   const [isTasksOpen, setTasksOpen] = useState(false);
-
-  const toggleProjects = () => setProjectsOpen(!isProjectsOpen);
-  const toggleTasks = () => setTasksOpen(!isTasksOpen);
+  const [isQuickLinksOpen, setIsQuickLinksOpen] = useState(false);
 
   const pathname = usePathname();
 
-  return (
-    <nav className="vertical-sidebar">
-      <div>
-        <button
-          onClick={toggleProjects}
-          className="vertical-sidebar__button"
-          aria-expanded={isProjectsOpen}
-          aria-label="Projects Menu"
-        >
-          Projects Summary {isProjectsOpen ? <CgRemove /> : <CgAdd />}
-        </button>
-        {isProjectsOpen && (
-          <ul className="vertical-sidebar__list">
-            {getMenuItems(projectLinks, pathname)}
-          </ul>
-        )}
-      </div>
+  const toggleProjects = () => setProjectsOpen(!isProjectsOpen);
+  const toggleTasks = () => setTasksOpen(!isTasksOpen);
+  const toggleQuickLinks = () => setIsQuickLinksOpen(!isQuickLinksOpen);
 
-      <div>
-        <button
-          onClick={toggleTasks}
-          className="vertical-sidebar__button"
-          aria-expanded={isTasksOpen}
-          aria-label="Tasks Menu"
-        >
-          Tasks Summary {isTasksOpen ? <CgRemove /> : <CgAdd />}
-        </button>
-        {isTasksOpen && (
-          <ul className="vertical-sidebar__list">
-            {getMenuItems(taskLinks, pathname)}
-          </ul>
-        )}
-      </div>
-    </nav>
+  const handleDeleteProject = async (projectId: number) => {
+    const response = await deleteProject(projectId);
+    if (response.status === 'success') {
+      // Optionally, update the UI here (e.g., remove the project from the state)
+    } else {
+      console.error(response.message);
+    }
+  };
+
+  const handleDeleteTask = async (taskId: number) => {
+    const response = await deleteTask(taskId);
+    if (response.status === 'success') {
+      // Optionally, update the UI here (e.g., remove the task from the state)
+    } else {
+      console.error(response.message);
+    }
+  };
+
+  return (
+    <div className="main-layout">
+      <nav className="vertical-sidebar">
+        <div>
+          <button
+            onClick={toggleProjects}
+            className="vertical-sidebar__button"
+            aria-expanded={isProjectsOpen}
+            aria-label="Projects Menu"
+          >
+            Projects Summary {isProjectsOpen ? <CgRemove /> : <CgAdd />}
+          </button>
+          {isProjectsOpen && (
+            <ul className="vertical-sidebar__list">
+              {projects.map((project) => (
+                <li key={project.id}>
+                  <span>{project.title}</span>
+                  <div>
+                    <button>Edit</button>
+                    <button onClick={() => handleDeleteProject(project.id)}>Delete</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div>
+          <button
+            onClick={toggleTasks}
+            className="vertical-sidebar__button"
+            aria-expanded={isTasksOpen}
+            aria-label="Tasks Menu"
+          >
+            Tasks Summary {isTasksOpen ? <CgRemove /> : <CgAdd />}
+          </button>
+          {isTasksOpen && (
+            <ul className="vertical-sidebar__list">
+              {tasks.map((task) => (
+                <li key={task.id}>
+                  <span>{task.title}</span>
+                  <div>
+                    <button>Edit</button>
+                    <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div>
+          <button
+            onClick={toggleQuickLinks}
+            className="vertical-sidebar__button"
+            aria-expanded={isQuickLinksOpen}
+            aria-label="QuickLinks Menu"
+          >
+            Quick Links {isQuickLinksOpen ? <CgRemove /> : <CgAdd />}
+          </button>
+          {isQuickLinksOpen && (
+            <ul className="vertical-sidebar__list">
+              {getMenuItems(quickLinks, pathname)}
+            </ul>
+          )}
+        </div>
+      </nav>
+    </div>
   );
 }
 
@@ -70,16 +136,18 @@ function getMenuItems(linkTargets: LinkTarget[], pathname: string) {
   return linkTargets.map(({ text, url }) => {
     const isCurrentPage = url === pathname;
     const cssClasses = `vertical-sidebar__link ${
-      isCurrentPage ? 'vertical-sidebar__link--current' : ''
+      isCurrentPage ? "vertical-sidebar__link--current" : ""
     }`;
+    const attributes = isCurrentPage
+      ? ({ "aria-current": "page" } as const)
+      : {};
 
     return (
       <li key={url} className="vertical-sidebar__item">
-        <Link className={cssClasses} href={url}>
+        <Link className={cssClasses} href={url} {...attributes}>
           {text}
         </Link>
       </li>
     );
   });
 }
-

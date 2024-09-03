@@ -1,0 +1,63 @@
+/* Basic form styling */
+.create-task-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input fields and labels */
+  .create-task-form .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .create-task-form label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #333;
+  }
+  
+  .create-task-form input[type="text"],
+  .create-task-form input[type="number"],
+  .create-task-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  /* Input focus state */
+  .create-task-form input[type="text"]:focus,
+  .create-task-form input[type="number"]:focus,
+  .create-task-form textarea:focus {
+    border-color: #0070f3;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+  }
+  
+  /* Textarea resizing */
+  .create-task-form textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    min-height: 120px;
+  }
+  
+  /* Submit button */
+  .create-task-form button[type="submit"] {
+    padding: 0.75rem 1.5rem;
+    background-color: #0070f3;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2
+  }

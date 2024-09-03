@@ -1,0 +1,82 @@
+/* Basic form styling */
+.create-project-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input fields and labels */
+  .create-project-form .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .create-project-form label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .create-project-form input[type="text"],
+  .create-project-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  
+  /* Input focus state */
+  .create-project-form input[type="text"]:focus,
+  .create-project-form textarea:focus {
+    border-color: #0070f3;
+    outline: none;
+  }
+  
+  /* Textarea resizing */
+  .create-project-form textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    min-height: 100px;
+  }
+  
+  /* Submit button */
+  .create-project-form button[type="submit"] {
+    padding: 0.75rem 1.5rem;
+    background-color: #0070f3;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  /* Submit button hover state */
+  .create-project-form button[type="submit"]:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Message styling */
+  .create-project-form .message {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  /* Success message styling */
+  .create-project-form .message.success {
+    color: green;
+  }
+  
+  /* Error message styling */
+  .create-project-form .message.error {
+    color: red;
+  }
+  

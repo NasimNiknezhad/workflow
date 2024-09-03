@@ -1,14 +1,68 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
 }
+
+
+model User {
+  id       Int       @id @default(autoincrement())
+  name     String
+  email    String    @unique
+  roll     String
+  projects Project[]
+  tasks    Task[]
+}
+
+model Project {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+  userId      Int
+  user        User    @relation(fields: [userId], references: [id])
+  tasks       Task[]
+
+  Coments Coments[]
+}
+
+model Status {
+  id     Int     @id @default(autoincrement())
+  status String?
+
+  Task Task[]
+}
+
+model Task {
+  id              Int     @id @default(autoincrement())
+  title           String
+  description     String?
+  completed       Boolean @default(false)
+  projectId       Int
+  project         Project @relation(fields: [projectId], references: [id])
+  userId          Int
+  asseignedUserId Int?
+  creatorId       Int
+  taskNumber      String
+  user            User    @relation(fields: [userId], references: [id])
+  Coments  Coments[]
+  statusId Int
+  status   Status    @relation(fields: [statusId], references: [id])
+}
+
+model Coments {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+  userId      Int
+  projectId   Int
+  project     Project @relation(fields: [projectId], references: [id])
+  taskId      Int
+  task        Task    @relation(fields: [taskId], references: [id])
+}
+
