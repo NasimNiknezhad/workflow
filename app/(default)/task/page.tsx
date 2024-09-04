@@ -5,6 +5,7 @@ import '../../../css/components/listView.css';
 import type { Comment } from "../../../types/projectType";
 
 
+
 type Props = {
   searchParams: {
     page?: string;
@@ -13,8 +14,7 @@ type Props = {
 };
 
 
-
-const defaultPerPage = 1;
+const defaultPerPage = 2;
 
 export default async function TasktList({
   searchParams: { page = '', perPage = '' },
@@ -48,22 +48,22 @@ export default async function TasktList({
           name: true,
         },
       },
-      asseignedUserId: true,
+ /*     asseignedUserId: true,
       assignedUser: {
         select: {
           name: true,
         },
-      },
+      },*/
       project: {
         select: {
           title: true,
         },
       },
-      status: {
+   /*  status: {
         select: {
           status: true,
         },
-      },
+      },*/
     },
     take: perPageNumber,
     skip: (pageNumber - 1) * perPageNumber,
@@ -73,25 +73,6 @@ export default async function TasktList({
   });
 
 
-  const comments = await prisma.coments.findMany({
-    select: {
-      id: true,
-      description: true,
-      task: {
-        select: {
-          id: true,   // Title of the task related to the comment
-        },
-      },
-      
-    },
-  });
-
-  const formattedComments: Comment[] = comments.map((comment) => ({
-    id: comment.id,
-    description: comment.description, // The comment description
-    taskId: comment.task.id, // The task ID as an object
-    
-  }));
 
   return (
     <div>
@@ -106,9 +87,6 @@ export default async function TasktList({
               description={task.description || ""}
               projectTitle={task.project.title}
               creator={task.user.name}
-              asignedTo={task.assignedUser?.name}
-              status={task.status.status || "Unknown Status"}
-              comment={formattedComments } // Assuming you want to add comments separately
             />
           ))}
         </ul>

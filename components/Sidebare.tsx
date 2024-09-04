@@ -1,21 +1,31 @@
+import prisma from '@/prisma/db';
 import SidebarNavigation from './SidebarNavigation';
 
-interface Project {
-  id: number;
-  title: string;
-}
 
-interface Task {
-  id: number;
-  title: string;
-}
+export default  async function Sidebare() {
 
-interface SidebarProps {
-  projects: Project[];
-  tasks: Task[];
-}
+  const projects = await prisma.project.findMany({
+     select: {
+       id: true,
+       title: true,
+     },
+     orderBy: {
+       id: 'asc',
+     },
+   });
+ 
+ 
+   const tasks = await prisma.task.findMany({
+     select: {
+       id: true,
+       title: true,
+     },
+     orderBy: {
+       id: 'asc',
+     },
+   })
 
-export default function Sidebare({ projects ,tasks}: SidebarProps) {
+
   return (
     <div>
       <SidebarNavigation projects={projects} tasks={tasks} />

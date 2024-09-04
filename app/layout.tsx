@@ -1,24 +1,12 @@
-import '@/css/style.css';
-import type { ReactNode } from 'react';
+"use client";
 
+import '@/css/style.css';
+import { useEffect, useState, type ReactNode } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Karla, Merriweather } from 'next/font/google';
-import Sidebare from '../components/Sidebare';
-import prisma from '@/prisma/db';
-
-export const metadata = {
-  title: 'Next',
-  description: 'Eine Next-Website',
-  icons: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
-};
-
-export const viewport = {
-  themeColor: [
-    { color: 'hotpink', media: '(prefers-color-scheme: light)' },
-    { color: 'purple', media: '(prefers-color-scheme: dark)' },
-  ],
-};
+import Sidebare from '@/components/Sidebare';
+import Login from '@/components/Login'; // Import the login component
 
 const karlaStyles = Karla({
   subsets: ['latin'],
@@ -36,47 +24,45 @@ const merriweatherStyles = Merriweather({
   variable: '--font-merriweather',
 });
 
-interface Project {
-  id: number;
-  title: string;
-}
+export default function RootLayout({ children }: { children: ReactNode }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  // Fetch projects data inside the layout
-  const projects = await prisma.project.findMany({
-    select: {
-      id: true,
-      title: true,
-    },
-    orderBy: {
-      id: 'asc',
-    },
-  });
+  // Check if the user is authenticated on mount
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
+  // Handle login
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
 
-  const tasks = await prisma.task.findMany({
-    select: {
-      id: true,
-      title: true,
-    },
-    orderBy: {
-      id: 'asc',
-    },
-  });
+  // Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    setIsAuthenticated(false);
+  };
 
   return (
     <html lang="de" className={`${karlaStyles.variable} ${merriweatherStyles.variable}`}>
       <body>
-        <div className="site-wrapper">
-          <Header />
-          <div className="main-layout">
-            <Sidebare projects={projects} tasks={tasks}/>
-            <div className="site-content">
-              {children}
+        {isAuthenticated ? (
+          <div className="site-wrapper">
+            <Header />
+            <div className="main-layout">
+              <Sidebare />
+              <div className="site-content">
+                {children}
+              </div>
             </div>
+            <button onClick={handleLogout}>Logout</button> {/* Add a Logout button */}
           </div>
-        { /* <Footer />*/}
-        </div>
+        ) : (
+          <Login onLogin={handleLogin} /> // Show Login component if not authenticated
+        )}
       </body>
     </html>
   );

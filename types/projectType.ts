@@ -18,10 +18,7 @@ export type Comment = {
     title: string;
     projectTitle: string;
     creator: string;
-    asignedTo?: string;
     description:string;
-    status: string;
-    comment?: Comment[]  | undefined;
   };
 
   export type TaskDetails = {
