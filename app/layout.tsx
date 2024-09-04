@@ -75,7 +75,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               {children}
             </div>
           </div>
-          <Footer />
+        { /* <Footer />*/}
         </div>
       </body>
     </html>

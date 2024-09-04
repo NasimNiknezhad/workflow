@@ -1,0 +1,229 @@
+.project-view {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .project-view h2 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .project-view p {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  .comments-section {
+    margin-top: 20px;
+  }
+  
+  .comments-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .comments-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .comment-item {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+  }
+  
+  .comment-item p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  
+  .comment-item strong {
+    color: #0070f3;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px; /* Space between the buttons */
+  }
+
+  .pagination a {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #0070f3;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  .pagination a:hover {
+    background-color: #005bb5;
+  }
+
+  .pagination a:disabled, 
+  .pagination a[aria-disabled="true"] {
+    background-color: #d3d3d3;
+    color: #888;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  /* General styling for the task view */
+.task-view {
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 800px;
+  margin: 2rem auto;
+  font-size: 1.2rem; /* Larger font size for readability */
+}
+
+/* Project Name */
+.project-name {
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem; /* Larger font size for the project name */
+}
+
+/* Task Name */
+.task-name {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem; /* Larger font size for the task name */
+}
+
+/* Creator and Assigned User */
+.task-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem; /* Larger font size for the names */
+}
+
+.creator, .assigned-to {
+  flex: 1;
+  margin-right: 1rem;
+  text-align: left;
+}
+
+.assigned-to {
+  text-align: right;
+}
+
+/* Task Description */
+.task-description {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1.2rem; /* Make description text slightly larger */
+}
+
+.task-description p {
+  margin: 0;
+}
+
+/* Task Status */
+.task-status {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Task Link/Button */
+.task-link {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.details-button {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.details-button:hover {
+  background-color: #005bb5;
+}
+
+/* General layout adjustments */
+strong {
+  font-weight: 600;
+}
+
+
+/* General styling for the task view */
+.task-view {
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 800px;
+  margin: 2rem auto;
+  font-size: 1.2rem;
+}
+
+.task-comments {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.comment {
+  margin-bottom: 1.5rem;
+}
+
+.comment p {
+  margin: 0;
+}
+
+.comment strong {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Task Meta */
+.task-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+/* Task Status */
+.task-status {
+  margin-top: 1.5rem;
+  font-weight: bold;
+}
+
+/* Link/Button for task details */
+.task-link {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.details-button {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}

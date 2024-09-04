@@ -1,58 +1,58 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  url      = env("POSTGRES_PRISMA_URL")
 }
 
-
 model User {
-  id       Int       @id @default(autoincrement())
-  name     String
-  email    String    @unique
-  roll     String
-  projects Project[]
-  tasks    Task[]
+  id            Int       @id @default(autoincrement())
+  name          String
+  email         String    @unique
+  roll          String
+  password      String
+  Coments       Coments[]
+  projects      Project[]
+  assignedTasks Task[]    @relation("AssignedUser")
+  createdTasks  Task[]    @relation("Creator")
+  Task          Task[]    @relation("TaskCreator")
 }
 
 model Project {
-  id          Int     @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   title       String
   description String?
   userId      Int
-  user        User    @relation(fields: [userId], references: [id])
+  Coments     Coments[]
+  user        User      @relation(fields: [userId], references: [id])
   tasks       Task[]
-
-  Coments Coments[]
 }
 
 model Status {
   id     Int     @id @default(autoincrement())
   status String?
-
-  Task Task[]
+  Task   Task[]
 }
 
 model Task {
-  id              Int     @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   title           String
   description     String?
-  completed       Boolean @default(false)
+  completed       Boolean   @default(false)
   projectId       Int
-  project         Project @relation(fields: [projectId], references: [id])
   userId          Int
   asseignedUserId Int?
   creatorId       Int
   taskNumber      String
-  user            User    @relation(fields: [userId], references: [id])
-  Coments  Coments[]
-  statusId Int
-  status   Status    @relation(fields: [statusId], references: [id])
+  statusId        Int
+  Coments         Coments[]
+  assignedUser    User?     @relation("AssignedUser", fields: [asseignedUserId], references: [id])
+  creator         User      @relation("Creator", fields: [creatorId], references: [id])
+  project         Project   @relation(fields: [projectId], references: [id])
+  status          Status    @relation(fields: [statusId], references: [id])
+  user            User      @relation("TaskCreator", fields: [userId], references: [id])
 }
 
 model Coments {
@@ -61,8 +61,8 @@ model Coments {
   description String?
   userId      Int
   projectId   Int
-  project     Project @relation(fields: [projectId], references: [id])
   taskId      Int
+  project     Project @relation(fields: [projectId], references: [id])
   task        Task    @relation(fields: [taskId], references: [id])
+  user        User    @relation(fields: [userId], references: [id])
 }
-
