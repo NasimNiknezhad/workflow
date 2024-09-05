@@ -1,45 +1,40 @@
+'use client';
+
 import { useState } from 'react';
-
-
+import type { UserList } from '@/types/userType';
 import '../css/components/login.css';
 
 interface LoginProps {
-  onLogin: () => void; 
+  onLogin: () => void;
+  users: UserList[]; // Pass the list of users to check credentials
 }
 
-interface LoginResponse {
-  token: string; 
-  message: string; 
-}
-
-export default function Login({ onLogin }: LoginProps) {
+export default function Login({ onLogin, users }: LoginProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    console.log('i am here' )
+
+  console.log('component-user' , users)
+
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    // Find the user by email
+    const foundUser = users.find((user) => user.email === email);
 
-      const data: LoginResponse = await response.json() as LoginResponse ;
+    if (!foundUser) {
+      setErrorMessage('User not found');
+      return;
+    }
 
-      if (response.ok) {
-        localStorage.setItem('authToken', data.token); 
-        onLogin();
-      } else {
-        setErrorMessage(data.message); 
-      }
-    } catch (error) {
-      setErrorMessage('An error occurred during login');
+    if (foundUser.password === password) {
+      localStorage.setItem('authToken', 'mockToken');
+      setErrorMessage('');
+      onLogin();
+    } else {
+      setErrorMessage('Invalid email or password');
     }
   };
 

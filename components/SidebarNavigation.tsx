@@ -1,10 +1,8 @@
-'use client';
-
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CgAdd, CgRemove } from "react-icons/cg";
-import { deleteProject, deleteTask } from './SidbarNavigationServerAction';
+import { deleteProject, deleteTask } from "./SidbarNavigationServerAction";
 import "../css/components/SidebarNavigation.css";
 
 interface Project {
@@ -18,8 +16,8 @@ interface Task {
 }
 
 interface MainLayoutProps {
-  projects: Project[];
-  tasks: Task[];
+  initialProjects: Project[];
+  initialTasks: Task[];
 }
 
 type LinkTarget = {
@@ -32,7 +30,12 @@ const quickLinks: LinkTarget[] = [
   { text: "New-Task", url: "/new-task" },
 ];
 
-export default function SidebarNavigation({ projects, tasks }: MainLayoutProps) {
+export default function SidebarNavigation({
+  initialProjects,
+  initialTasks,
+}: MainLayoutProps) {
+  const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [isProjectsOpen, setProjectsOpen] = useState(false);
   const [isTasksOpen, setTasksOpen] = useState(false);
   const [isQuickLinksOpen, setIsQuickLinksOpen] = useState(false);
@@ -45,8 +48,10 @@ export default function SidebarNavigation({ projects, tasks }: MainLayoutProps) 
 
   const handleDeleteProject = async (projectId: number) => {
     const response = await deleteProject(projectId);
-    if (response.status === 'success') {
-      // Optionally, update the UI here (e.g., remove the project from the state)
+    if (response.status === "success") {
+      setProjects((prevProjects) =>
+        prevProjects.filter((project) => project.id !== projectId)
+      );
     } else {
       console.error(response.message);
     }
@@ -54,8 +59,8 @@ export default function SidebarNavigation({ projects, tasks }: MainLayoutProps) 
 
   const handleDeleteTask = async (taskId: number) => {
     const response = await deleteTask(taskId);
-    if (response.status === 'success') {
-      // Optionally, update the UI here (e.g., remove the task from the state)
+    if (response.status === "success") {
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
     } else {
       console.error(response.message);
     }
@@ -78,9 +83,11 @@ export default function SidebarNavigation({ projects, tasks }: MainLayoutProps) 
               {projects.map((project) => (
                 <li key={project.id}>
                   <span>{project.title}</span>
-                  <div>
+                  <div className="button-group">
                     <button>Edit</button>
-                    <button onClick={() => handleDeleteProject(project.id)}>Delete</button>
+                    <button onClick={() => handleDeleteProject(project.id)}>
+                      Delete
+                    </button>
                   </div>
                 </li>
               ))}
@@ -102,9 +109,11 @@ export default function SidebarNavigation({ projects, tasks }: MainLayoutProps) 
               {tasks.map((task) => (
                 <li key={task.id}>
                   <span>{task.title}</span>
-                  <div>
+                  <div className="button-group">
                     <button>Edit</button>
-                    <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+                    <button onClick={() => handleDeleteTask(task.id)}>
+                      Delete
+                    </button>
                   </div>
                 </li>
               ))}

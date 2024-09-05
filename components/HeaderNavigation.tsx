@@ -23,9 +23,6 @@ export default function HeaderNavigation() {
       <ul className="main-navigation__list">
         {getMenuItems(linkTargets, pathname)}
       </ul>
-      <button className="main-navigation__button" aria-label="Logout">
-        Logout
-      </button>
     </nav>
   );
 }

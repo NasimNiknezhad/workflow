@@ -1,67 +1,88 @@
 "use client";
 
-import '@/css/style.css';
-import { useEffect, useState, type ReactNode } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { Karla, Merriweather } from 'next/font/google';
-import Sidebare from '@/components/Sidebare';
-import Login from '@/components/Login'; // Import the login component
+import { Karla, Merriweather } from "next/font/google";
+import "@/css/style.css";
+import { useEffect, useState, type ReactNode } from "react";
+import Header from "@/components/Header";
+import Sidebare from "@/components/Sidebare";
+import type { UserList } from "@/types/userType";
+import Login from "@/components/Login";
+import Footer from "@/components/Footer";
 
 const karlaStyles = Karla({
-  subsets: ['latin'],
-  weight: ['500', '800'],
-  style: 'normal',
-  display: 'swap',
-  variable: '--font-karla',
+  subsets: ["latin"],
+  weight: ["500", "800"],
+  style: "normal",
+  display: "swap",
+  variable: "--font-karla",
 });
 
 const merriweatherStyles = Merriweather({
-  subsets: ['latin'],
-  weight: ['300', '400', '700', '900'],
-  style: ['italic', 'normal'],
-  display: 'swap',
-  variable: '--font-merriweather',
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  style: ["italic", "normal"],
+  display: "swap",
+  variable: "--font-merriweather",
 });
+
+
+
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [usersList, setUsersList] = useState<UserList[]>([]);
 
-  // Check if the user is authenticated on mount
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
     if (token) {
       setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
   }, []);
 
-  // Handle login
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-  };
+  // Fetch user data from the API route (no async in client component)
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/api/users");
+        const data = (await response.json()) as UserList[];
+        setUsersList(data);
+      } catch (error) {
+        console.error("Failed to fetch users", error);
+      }
+    };
 
-  // Handle logout
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setIsAuthenticated(false);
+    fetchUserData();
+  }, []);
+
+  const handleLogin = () => {
+    console.log("handel.login");
+    setIsAuthenticated(true); // Mark as authenticated
+    localStorage.setItem("authToken", "mockToken");
+    console.log("handel.mockToken");
   };
 
   return (
-    <html lang="de" className={`${karlaStyles.variable} ${merriweatherStyles.variable}`}>
+    <html
+      lang="de"
+      className={`${karlaStyles.variable} ${merriweatherStyles.variable}`}
+    >
       <body>
         {isAuthenticated ? (
           <div className="site-wrapper">
-            <Header />
+            <Header
+              isAuthenticated={isAuthenticated}
+              setIsAuthenticated={setIsAuthenticated}
+            />{" "}
             <div className="main-layout">
-              <Sidebare />
-              <div className="site-content">
-                {children}
-              </div>
+              <Sidebare  />
+              <div className="site-content">{children}</div>
             </div>
-            <button onClick={handleLogout}>Logout</button> {/* Add a Logout button */}
+            <Footer />
           </div>
         ) : (
-          <Login onLogin={handleLogin} /> // Show Login component if not authenticated
+          <Login onLogin={handleLogin} users={usersList} />
         )}
       </body>
     </html>

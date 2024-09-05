@@ -14,6 +14,7 @@
     "@prisma/client": "^5.19.1",
     "bcryptjs": "^2.4.3",
     "es-toolkit": "^1.17.0",
+    "firebase": "^10.13.1",
     "next": "^14.2.7",
     "open-props": "^1.7.6",
     "react": "^18.3.1",

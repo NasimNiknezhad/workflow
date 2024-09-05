@@ -1,46 +1,71 @@
-
+/* Main navigation container, using flexbox to align items in a row */
 .main-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* This will push the logout button to the end */
-    background-color: #f8f8f8;
-    padding: 10px;
-  }
-  
-  .main-navigation__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-  }
-  
-  .main-navigation__item {
-    margin-right: 15px;
-  }
-  
-  .main-navigation__link {
-    text-decoration: none;
-    color: #333;
-    padding: 10px 15px;
-    display: block;
-    transition: color 0.3s ease;
-  }
-  
-  .main-navigation__link:hover,
-  .main-navigation__link--current {
-    color: #0070f3; /* Example hover color */
-    font-weight: bold;
-  }
-  
-  .main-navigation__button {
-    background-color: #0070f3; /* Example button background color */
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .main-navigation__button:hover {
-    background-color: #005bb5; /* Example button hover color */
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pushes the logout button to the far end */
+  background-color: #f8f8f8;
+  padding: 10px;
+}
+
+/* List of navigation items */
+.main-navigation__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+/* Each navigation item with margin between them */
+.main-navigation__item {
+  margin-right: 15px;
+}
+
+/* Navigation links styling */
+.main-navigation__link {
+  text-decoration: none;
+  color: #333;
+  padding: 10px 15px;
+  display: block;
+  transition: color 0.3s ease;
+}
+
+/* Hover and active state styling */
+.main-navigation__link:hover,
+.main-navigation__link--current {
+  color: #0070f3; /* Example hover color */
+  font-weight: bold;
+}
+
+/* Container for HeaderNavigation and Logout button */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #f8f8f8;
+
+}
+
+/* Equal width for each item (HeaderNavigation and button) */
+.header-item {
+  flex: 1; /* This ensures both items take equal width */
+  display: flex; /* To align content inside flex containers */
+  justify-content: center; /* Center content within the div */
+  align-items: center; /* Vertical alignment */
+}
+
+/* Styling for the logout button to make it compact */
+.header-item button {
+  background-color: #0070f3;
+  color: rgb(199, 54, 54);
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header-item button:hover {
+  background-color: #005bb5;
+}

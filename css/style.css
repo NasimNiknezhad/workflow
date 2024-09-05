@@ -6,6 +6,3 @@
 @import 'navigation';
 @import 'typographie';
 @import 'components';
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

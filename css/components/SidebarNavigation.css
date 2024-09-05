@@ -70,4 +70,26 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
   }
+
+  .button-group {
+    display: flex;
+    gap: 10px; /* Adds space between the buttons */
+  }
+  
+  /* Style for individual buttons */
+  .button-group button {
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for buttons */
+  .button-group button:hover {
+    background-color: #005bb5;
+  }
   
