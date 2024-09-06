@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+'use client'
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CgAdd, CgRemove } from "react-icons/cg";
 import { deleteProject, deleteTask } from "./SidbarNavigationServerAction";
+import Dialog from "./Dialog";
 import "../css/components/SidebarNavigation.css";
+import TaskEditor from "./task/TaskEditor";
 
 interface Project {
   id: number;
@@ -39,8 +42,15 @@ export default function SidebarNavigation({
   const [isProjectsOpen, setProjectsOpen] = useState(false);
   const [isTasksOpen, setTasksOpen] = useState(false);
   const [isQuickLinksOpen, setIsQuickLinksOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null); 
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null); 
+  const [openDialog, setOpenDialog] = useState(false);
+
 
   const pathname = usePathname();
+  const dialogRef = useRef<{ openDialog: () => void; closeDialog: () => void }>(
+    null
+  ); 
 
   const toggleProjects = () => setProjectsOpen(!isProjectsOpen);
   const toggleTasks = () => setTasksOpen(!isTasksOpen);
@@ -66,6 +76,24 @@ export default function SidebarNavigation({
     }
   };
 
+  const handleEditProject = (project: Project) => {
+    setSelectedProject(project);
+    setSelectedTask(null); 
+  };
+
+  const handleEditTask = (task: Task) => {
+    setSelectedTask(task);
+    setSelectedProject(null); 
+    setOpenDialog(true); 
+  };
+
+  const handleCloseDialog = () => {
+    if (dialogRef.current) {
+      dialogRef.current.closeDialog(); 
+    }
+  };
+
+
   return (
     <div className="main-layout">
       <nav className="vertical-sidebar">
@@ -84,7 +112,9 @@ export default function SidebarNavigation({
                 <li key={project.id}>
                   <span>{project.title}</span>
                   <div className="button-group">
-                    <button>Edit</button>
+                    <button onClick={() => handleEditProject(project)}>
+                      Edit
+                    </button>
                     <button onClick={() => handleDeleteProject(project.id)}>
                       Delete
                     </button>
@@ -110,7 +140,7 @@ export default function SidebarNavigation({
                 <li key={task.id}>
                   <span>{task.title}</span>
                   <div className="button-group">
-                    <button>Edit</button>
+                    <button onClick={() => handleEditTask(task)}>Edit</button>
                     <button onClick={() => handleDeleteTask(task.id)}>
                       Delete
                     </button>
@@ -137,6 +167,11 @@ export default function SidebarNavigation({
           )}
         </div>
       </nav>
+
+      {/* Dialog for editing project or task */}
+     { openDialog && <Dialog >
+        <TaskEditor></TaskEditor>
+      </Dialog>}
     </div>
   );
 }

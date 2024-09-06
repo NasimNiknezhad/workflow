@@ -1,0 +1,23 @@
+.modal {
+	box-shadow: var(--shadow-6);
+	padding: 0;
+	border: none;
+	animation: var(--animation-slide-in-down);
+	animation-timing-function: var(--ease-elastic-1);
+	animation-duration: 0.25s;
+
+	:where(.modal__inner) {
+		padding: 1rem;
+		border: 3px solid black;
+	}
+
+	:where(.modal__close) {
+		margin-inline-start: auto;
+		display: block;
+	}
+
+	&::backdrop {
+	
+		background-color: rgba(250, 235, 215, 0.402);
+	}
+}

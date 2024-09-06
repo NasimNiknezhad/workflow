@@ -1,0 +1,48 @@
+.contact-info {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-info h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .contact-info__details {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .contact-info__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .contact-info__item label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .contact-info__item span {
+    font-style: italic;
+    color: #777;
+  }
+  
+  .contact-info__item:hover {
+    background-color: #f0f0f0;
+  }
+  

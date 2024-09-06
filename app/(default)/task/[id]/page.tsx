@@ -1,6 +1,5 @@
 
 import prisma from '@/prisma/db';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 type Props = {
@@ -24,9 +23,9 @@ export default async function SingleTaskPage({ params: { id } }: Props) {
     },
     include: {
       project: true,
-      user: true, // For creator
-      assignedUser: true, // For assigned user
-      status: true, // For status
+      user: true, 
+      assignedUser: true, 
+      status: true, 
       
       
     },
@@ -34,22 +33,20 @@ export default async function SingleTaskPage({ params: { id } }: Props) {
 
   const taskComments = await prisma.coments.findMany({
     where: {
-      taskId, // Use `findMany` because taskId is not unique
+      taskId, 
     },
     select: {
       id: true,
-      description: true, // Select the comment description
+      description: true, 
      
     },
   });
   
 
-  // Handle not found case
   if (!taskDetail) {
     return notFound();
   }
 
-  // Destructure necessary data
   const {
     title,
     description,
@@ -76,23 +73,17 @@ export default async function SingleTaskPage({ params: { id } }: Props) {
   }));
 
 
-  // Filtering comments (if needed)
-  //const filteredComments = Comment ?? [];
-
   return (
     <>
       <article className="task-view">
-        {/* Project Name */}
         <div className="project-name">
           <p><strong>Project Name:</strong> {project.title}</p>
         </div>
 
-        {/* Task Name */}
         <div className="task-name">
           <p><strong>Task Name:</strong> {title}</p>
         </div>
 
-        {/* Creator and Assigned User */}
         <div className="task-meta">
           <div className="creator">
             <p><strong>Creator:</strong> {user.name}</p>
@@ -102,18 +93,15 @@ export default async function SingleTaskPage({ params: { id } }: Props) {
           </div>
         </div>
 
-        {/* Task Description */}
         <div className="task-description">
           <p><strong>Task Description:</strong> {description || 'No description provided'}</p>
         </div>
 
-        {/* Task Status */}
         <div className="task-status">
           <p><strong>Status:</strong> {status.status || 'Unknown Status'}</p>
         </div>
 
 
-        {/* Task Comments */}
         <div className="task-comments">
           <p><strong>Comments:</strong></p>
           {taskComments.length > 0 ? (

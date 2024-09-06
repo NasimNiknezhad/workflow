@@ -22,10 +22,9 @@ export default async function Create() {
     },
   });
 
-  // Ensure status is not null, or provide a default value
   const filteredStatus = status.map((s) => ({
     ...s,
-    status: s.status || "Unknown Status", // Provide a default value if status is null
+    status: s.status || "Unknown Status", 
   }));
 
   return (

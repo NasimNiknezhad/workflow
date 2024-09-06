@@ -40,10 +40,9 @@ footer {
 	padding-block: var(--content-padding);
 }
 
-/* Sidebar specific styles */
 .sidebar {
-	width: 250px; /* Adjust the width as needed */
-	background-color: var(--background-color); /* Match your design */
+	width: 250px; 
+	background-color: var(--background-color); 
 }
 
 .content-padding {

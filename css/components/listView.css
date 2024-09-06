@@ -1,11 +1,11 @@
 
 .project-view {
-  max-width: 100%; /* Allow the project view to take up the full width inside site-content */
+  max-width: 100%;
   padding: 20px;
   background-color: #f4f4f4;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Adds spacing between multiple project views */
+  margin-bottom: 20px;
 }
 
   

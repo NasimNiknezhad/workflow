@@ -8,7 +8,7 @@ export default function DefaultLayout() {
   
         <>
           <header>
-            <h1>Willkommen zu WorkFlow</h1>
+            <h1>Welcome to TaskHub</h1>
           </header>
           <main >
             <h2>You are logged in!</h2>

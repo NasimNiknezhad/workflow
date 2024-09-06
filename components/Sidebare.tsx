@@ -31,7 +31,6 @@ export default function Sidebare() {
       }
     };
 
-    // Fetch Tasks
     const fetchTasks = async () => {
       try {
         const res = await fetch("api/tasks");
@@ -42,7 +41,6 @@ export default function Sidebare() {
       }
     };
 
-    // Fetch both data
     const fetchData = async () => {
       await Promise.all([fetchProjects(), fetchTasks()]);
       setLoading(false);

@@ -4,7 +4,6 @@ import prisma from '@/prisma/db';
 import { revalidatePath } from 'next/cache';
 import { zfd } from 'zod-form-data';
 import { z } from 'zod';
-import { wait } from '@/lib/helpers';
 export async function serverTest(count: number) {
   console.log('Hallo auf dem Server!');
 
@@ -36,7 +35,7 @@ export async function addProject(prevState: unknown, formData: FormData) {
         description: data.description,
         userId: 1, 
         tasks: {
-          create: [], // If you're creating associated tasks, add them here; otherwise, leave it as an empty array
+          create: [],
         },
       },
     });

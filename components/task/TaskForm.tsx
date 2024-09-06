@@ -2,7 +2,7 @@
 import { useFormState } from "react-dom";
 import SubmitButton from "../SubmitButton";
 import { addTask } from './NewTaskServerActions';
-import { useEffect, useRef, useState } from "react";
+import {  useRef } from "react";
 import './taskForm.css';
 
 export type  Project= {
@@ -34,7 +34,7 @@ export default function TaskForm({ projectsList,statusList }: TaskFormProps) {
     <form className="create-task-form" action={formAction} ref={formRef}>
       <div className="inputs">
         <div>
-          <label htmlFor="title">Task Title</label>
+          <label htmlFor="title">Task Title </label>
           <input
             type="text"
             id="title"

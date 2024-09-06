@@ -18,7 +18,7 @@ export async function addTask(prevState: unknown, formData: FormData) {
   if (!success) {
     console.log(error);
     return {
-      message: 'Bitte überprüfen Sie Ihre Eingabe!',
+      message: 'Please check your input!',
       status: 'data-error',
     };
   }
@@ -29,9 +29,9 @@ export async function addTask(prevState: unknown, formData: FormData) {
       description: data.description,
       projectId: data.projectId,
       statusId: data.statusId,
-      userId: 1, // Assuming you have the userId available; replace with the actual user ID
-      taskNumber: `TASK-${Math.floor(Math.random() * 10000)}`, // Example task number generation
-      creatorId: 1, // Replace with the actual creator's user ID
+      userId: 1, 
+      taskNumber: `TASK-${Math.floor(Math.random() * 10000)}`, 
+      creatorId: 1, 
     },
   });
 

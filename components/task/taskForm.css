@@ -1,4 +1,3 @@
-/* Basic form styling */
 .create-task-form {
     max-width: 600px;
     margin: 0 auto;
@@ -8,7 +7,6 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
-  /* Input fields and labels */
   .create-task-form .inputs {
     display: flex;
     flex-direction: column;
@@ -34,7 +32,6 @@
     transition: border-color 0.2s, box-shadow 0.2s;
   }
   
-  /* Input focus state */
   .create-task-form input[type="text"]:focus,
   .create-task-form input[type="number"]:focus,
   .create-task-form textarea:focus {
@@ -43,13 +40,11 @@
     box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
   }
   
-  /* Textarea resizing */
   .create-task-form textarea {
-    resize: vertical; /* Allow vertical resizing only */
+    resize: vertical; 
     min-height: 120px;
   }
   
-  /* Submit button */
   .create-task-form button[type="submit"] {
     padding: 0.75rem 1.5rem;
     background-color: #0070f3;

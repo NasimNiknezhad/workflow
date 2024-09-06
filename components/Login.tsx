@@ -6,7 +6,7 @@ import '../css/components/login.css';
 
 interface LoginProps {
   onLogin: () => void;
-  users: UserList[]; // Pass the list of users to check credentials
+  users: UserList[]; 
 }
 
 export default function Login({ onLogin, users }: LoginProps) {
@@ -21,7 +21,6 @@ export default function Login({ onLogin, users }: LoginProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Find the user by email
     const foundUser = users.find((user) => user.email === email);
 
     if (!foundUser) {

@@ -1,16 +1,16 @@
 
 .main-layout {
     display: flex;
-    height: 100vh; /* Full height of the viewport */
+    height: 100vh; 
   }
   
   .vertical-sidebar {
-    width: 250px; /* Sidebar width */
-    background-color:  #fff; /* Background color of the sidebar */
+    width: 250px; 
+    background-color:  #fff; 
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    border: 2px solid #ced1d5; /* Border around the entire sidebar */
-    border-radius: 10px; /* Rounded corners for the sidebar */
+    border: 2px solid #ced1d5;
+    border-radius: 10px; 
   }
   
   .vertical-sidebar__button {
@@ -22,7 +22,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    color:  #333;  /* Button text color */
+    color:  #333;  
     margin-bottom: 10px;
   }
   
@@ -38,17 +38,17 @@
   
   .vertical-sidebar__link {
     text-decoration: none;
-    color: #333; /* Default text color */
+    color: #333; 
     display: block;
     padding: 10px;
     border-radius: 5px;
-    transition: color 0.3s ease; /* Transition for hover effect */
+    transition: color 0.3s ease; 
   }
   
   .vertical-sidebar__link:hover,
   .vertical-sidebar__link--current {
-    color: #0070f3; /* Change text color on hover */
-    background-color: transparent; /* Keep the background color the same */
+    color: #0070f3;
+    background-color: transparent; 
   }
   
   .main-content {
@@ -73,10 +73,9 @@
 
   .button-group {
     display: flex;
-    gap: 10px; /* Adds space between the buttons */
+    gap: 10px; 
   }
   
-  /* Style for individual buttons */
   .button-group button {
     background-color: #0070f3;
     color: white;
@@ -88,8 +87,26 @@
     transition: background-color 0.3s ease;
   }
   
-  /* Hover effect for buttons */
   .button-group button:hover {
     background-color: #005bb5;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
   }
   
