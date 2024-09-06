@@ -5,11 +5,8 @@ import { addProject } from "./newProjectServerActions";
 import { useEffect, useRef } from "react";
 import "./projectForm.css";
 
-export default function ProjectForm({
-  onProjectAdded,
-}: {
-  onProjectAdded: () => void;
-}) {
+
+export default function ProjectForm() {
   const formRef = useRef<HTMLFormElement>(null!);
   const [formState, formAction] = useFormState(addProject, {
     message: "",
@@ -20,9 +17,8 @@ export default function ProjectForm({
     if (formState.status === "success") {
       formRef.current.reset();
 
-      onProjectAdded();
     }
-  }, [formState, onProjectAdded]);
+  }, [formState]);
 
   return (
     <form className="create-project-form" action={formAction} ref={formRef}>
